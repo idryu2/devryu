@@ -1,0 +1,40 @@
+:root {
+  --naver-green: #03c75a;
+  --naver-green-dark: #02b350;
+  --text-strong: #222;
+  --text-weak: #767676;
+  --line: #eaeaea;
+  --bg: #f5f6f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text-strong);
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  max-width: 1130px;
+  margin: 0 auto;
+  padding: 0 16px;
+}

@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+
+# Python (계산기)
+__pycache__/
+*.pyc

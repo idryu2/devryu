@@ -1,0 +1,20 @@
+{
+  "name": "devryu-naver-main",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "네이버 메인 스타일 페이지 + 블로그 기능 영역",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
