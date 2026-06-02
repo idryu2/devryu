@@ -1,0 +1,40 @@
+name: Build Windows EXE
+
+# 계산기 Windows 실행파일(.exe) 자동 빌드
+# - 코드 푸시 시 자동 실행되고, 수동 실행(workflow_dispatch)도 가능합니다.
+# - 빌드된 .exe 는 Actions 실행 페이지의 Artifacts 에서 내려받을 수 있습니다.
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "calculator.py"
+      - ".github/workflows/build-exe.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 소스 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: PyInstaller 설치
+        run: pip install pyinstaller
+
+      - name: EXE 빌드
+        run: pyinstaller --onefile --windowed --name Calculator calculator.py
+
+      - name: 빌드 결과 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: Calculator-windows-exe
+          path: dist/Calculator.exe
+          if-no-files-found: error

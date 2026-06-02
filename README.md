@@ -17,6 +17,26 @@ python calculator.py
 > 설치하세요. 설치 시 **"Add Python to PATH"** 옵션을 꼭 체크하세요.
 > (tkinter는 Windows용 Python 설치 파일에 기본 포함되어 있습니다.)
 
+## EXE 파일로 만들기 (설치 없이 실행)
+
+`.exe` 로 만들면 Python 이 없는 PC 에서도 더블클릭만으로 실행됩니다.
+
+### 방법 A. GitHub Actions 로 자동 빌드 (PC 에 설치 불필요)
+1. 코드를 GitHub 에 푸시하면 **Windows 가상머신이 자동으로 빌드**합니다.
+2. GitHub 레포 → **Actions** 탭 → 최근 실행 → 아래 **Artifacts** 의
+   `Calculator-windows-exe` 를 내려받으면 `Calculator.exe` 가 들어 있습니다.
+3. 수동 실행: Actions 탭에서 **Build Windows EXE** → **Run workflow** 클릭.
+
+> ⚠️ Windows `.exe` 는 반드시 Windows 에서 빌드해야 합니다. (PyInstaller 는
+> 크로스 컴파일을 지원하지 않으므로 Linux/macOS 에서는 만들 수 없습니다.)
+
+### 방법 B. 내 Windows PC 에서 직접 빌드
+```cmd
+pip install pyinstaller
+pyinstaller --onefile --windowed --name 계산기 calculator.py
+```
+완료되면 `dist\계산기.exe` 가 생성됩니다.
+
 ## 기능
 
 - 사칙연산: `+`, `−`, `×`, `÷`
