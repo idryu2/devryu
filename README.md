@@ -87,6 +87,34 @@ python monitor.py
 - 24시간 돌리려면 PC를 켜두거나, 라즈베리파이/클라우드 서버에서
   `nohup python monitor.py &` 또는 `systemd`/`pm2` 등으로 상시 실행하세요.
 
+## 5. (선택) PC 없이 24시간 자동 운영 — GitHub Actions
+
+PC를 안 켜놔도 GitHub가 **5분마다 자동으로** 확인해서 알림을 보내줍니다. 서버 0대, 공개 저장소면 무료.
+
+> 📁 워크플로 파일: `.github/workflows/cafe-alert.yml` (이미 포함됨)
+
+설정은 딱 3가지:
+
+**① 저장소를 공개로 전환** (공개면 Actions 무료)
+- GitHub 저장소 → `Settings` → `General` → 맨 아래 `Danger Zone` → `Change visibility` → **Public**
+
+**② 알림 비밀값 등록** (코드에 토큰을 안 넣고 안전하게)
+- 저장소 → `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
+- 아래 2개(비공개 카페면 3개) 등록:
+  | 이름 | 값 |
+  |------|------|
+  | `TELEGRAM_BOT_TOKEN` | BotFather 토큰 |
+  | `TELEGRAM_CHAT_ID` | getUpdates 로 확인한 숫자 |
+  | `NAVER_COOKIE` | (비공개 카페일 때만) 로그인 쿠키 |
+
+**③ 기본 브랜치에 올리기** ⚠️ 중요
+- GitHub 스케줄(cron)은 **기본 브랜치(main/master)** 에 있는 워크플로만 자동 실행됩니다.
+- 따라서 이 브랜치를 기본 브랜치로 **병합(merge)** 해야 5분마다 자동으로 돌아갑니다.
+- 감시 대상(카페/키워드)을 바꾸려면 `cafe-alert.yml` 위쪽 `NAVER_CLUB_ID/MENU_ID/KEYWORD` 값만 고치면 됩니다.
+
+설정 후 `Actions` 탭에서 워크플로 선택 → `Run workflow` 로 **수동 1회 실행**해 동작을 바로 확인할 수 있어요.
+(첫 실행은 기준점만 잡고, 그 다음 실행부터 새 글 알림이 갑니다.)
+
 ## 파일 구조
 
 | 파일 | 설명 |

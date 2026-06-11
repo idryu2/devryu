@@ -1,0 +1,60 @@
+name: 네이버 카페 새 글 알림
+
+# 5분마다 자동 실행(GitHub 스케줄 최소 간격) + 수동 실행 버튼
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+# 동시에 두 개가 겹쳐 돌지 않도록
+concurrency:
+  group: cafe-alert
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      # ----- 감시 대상(비밀 아님: 여기서 바로 수정 가능) -----
+      NAVER_CLUB_ID: "20486145"
+      NAVER_MENU_ID: "0"
+      NAVER_KEYWORD: "카리20"
+      # ----- 알림 설정 -----
+      NOTIFY_METHOD: telegram
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      # 비공개 카페일 때만 Secrets 에 NAVER_COOKIE 추가(없으면 빈 값)
+      NAVER_COOKIE: ${{ secrets.NAVER_COOKIE }}
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 이전 상태 복원(이미 알린 글 기록)
+        uses: actions/cache/restore@v4
+        with:
+          path: seen_articles.json
+          key: seen-articles-${{ github.run_id }}
+          restore-keys: |
+            seen-articles-
+
+      - name: 새 글 확인 & 알림
+        run: python monitor.py --once
+
+      - name: 상태 파일 보장
+        if: always()
+        run: '[ -f seen_articles.json ] || echo "[]" > seen_articles.json'
+
+      - name: 상태 저장(다음 실행용)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: seen_articles.json
+          key: seen-articles-${{ github.run_id }}
