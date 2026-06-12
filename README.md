@@ -117,12 +117,11 @@ ANTHROPIC_API_KEY=sk-ant-...
 ## 개발 (로컬, 컨테이너 없이)
 
 ```bash
-# 백엔드
+# 백엔드 (로컬 DB는 PostgreSQL 15+pgvector 필요)
 cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
-alembic upgrade head           # 마이그레이션
-python -m app.seed             # 가상 데이터 시드
+python -m app.seed             # 스키마 초기화(create_all+pgvector) + 가상 데이터 시드
 uvicorn app.main:app --reload  # http://localhost:8000
 
 # 규칙 엔진 단위 테스트 (CDSS 신뢰성의 핵심)
@@ -157,10 +156,10 @@ npm run lint
 
 ## 개발 진행 단계
 
-1. ✅ 프로젝트 구조 + README 초안 + docker-compose 골격 ← **현재 단계**
-2. ⬜ 데이터 모델/스키마(FHIR 참고) + DB 마이그레이션 + 시드 데이터
-3. ⬜ 규칙 엔진 + 규칙 JSON + 단위 테스트 (가장 중요)
-4. ⬜ 백엔드 API 전체
-5. ⬜ LLM 추상화 + mock + RAG 파이프라인
-6. ⬜ 프론트엔드 (처방 메인 화면 우선)
-7. ⬜ 통합 점검 + README 완성 + 데모 시나리오 문서
+1. ✅ 프로젝트 구조 + README + docker-compose 골격
+2. ✅ 데이터 모델/스키마(FHIR 참고) + 스키마 초기화 + 시드 데이터(약물 59 / 환자 11 / 가이드라인 15청크)
+3. ✅ 규칙 엔진 + 규칙 JSON + 단위 테스트 (40 케이스, 8개 카테고리)
+4. ✅ 백엔드 API 전체 (`/cdss/evaluate` 등) + 통합 테스트
+5. ✅ LLM 추상화(Anthropic/OpenAI/Mock) + RAG 파이프라인(pgvector)
+6. ✅ 프론트엔드 (CPOE / 환자목록 / Q&A / 감사로그 / 대시보드)
+7. ✅ 통합 점검 + 데모 시나리오 문서(`docs/demo-scenarios.md`)

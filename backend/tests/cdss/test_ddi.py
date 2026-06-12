@@ -7,7 +7,9 @@ from helpers import (
     CLARITHROMYCIN,
     DIGOXIN,
     IBUPROFEN,
+    KCL,
     LEVOFLOXACIN,
+    LOSARTAN,
     METOPROLOL,
     RAMIPRIL,
     SERTRALINE,
@@ -47,6 +49,16 @@ def test_simvastatin_enzyme_inhibitor_myopathy_critical(engine):
 def test_hyperkalemia_pair_warning(engine):
     alerts = by_category(engine.evaluate(patient(), [order(RAMIPRIL), order(SPIRONOLACTONE)]), "drug_drug")
     assert any("고칼륨" in a.title for a in alerts)
+
+
+def test_hyperkalemia_polypharmacy_aggregated_to_single_alert(engine):
+    """가산 위험은 쌍마다 띄우지 않고 하나의 경고로 집계한다(경고 피로 방지)."""
+    p = patient(current_meds=(RAMIPRIL, SPIRONOLACTONE))
+    alerts = [a for a in by_category(engine.evaluate(p, [order(LOSARTAN), order(KCL)]), "drug_drug")
+              if "고칼륨" in a.title]
+    assert len(alerts) == 1
+    # 관련 약물 4종이 모두 한 경고에 집계됨
+    assert len(alerts[0].related_drugs) == 4
 
 
 def test_qt_pair_warning(engine):

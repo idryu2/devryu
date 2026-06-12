@@ -44,9 +44,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 cp .env.example .env && docker compose up --build
 # → frontend :5173, backend :8000 (/docs), db :5432
 
-# 백엔드 로컬
+# 백엔드 로컬 (PostgreSQL 15 + pgvector 필요)
 cd backend && pip install -e ".[dev]"
-alembic upgrade head && python -m app.seed
+python -m app.seed            # init_db(create_all+pgvector) + 시드 (멱등)
 uvicorn app.main:app --reload
 
 # 규칙 엔진 테스트 (CDSS 신뢰성의 핵심)
@@ -77,15 +77,19 @@ npm run test && npm run lint
 - 타입(TS/Pydantic)을 충실히 명시한다.
 - 주석은 "왜"를 설명하는 곳에만 단다(무엇/어떻게는 코드로).
 
-## 진행 단계 (현재: 1단계 완료)
+## 구현 현황 (전 단계 완료)
 
-1. ✅ 프로젝트 구조 + README + docker-compose 골격
-2. ⬜ 데이터 모델/스키마(FHIR) + 마이그레이션 + 시드
-3. ⬜ 규칙 엔진 + 규칙 JSON + 단위 테스트
-4. ⬜ 백엔드 API 전체
-5. ⬜ LLM 추상화 + mock + RAG
-6. ⬜ 프론트엔드
-7. ⬜ 통합 + README 완성 + 데모 시나리오 문서
+- 백엔드: 모델/스키마, 규칙 엔진(8개 카테고리) + JSON 규칙셋, 전체 API, LLM 추상화, RAG
+- 프론트엔드: CPOE 처방화면 / 환자목록 / 가이드라인 Q&A / 감사로그 / 경고 통계
+- 테스트: 규칙 엔진 단위 40 + API 통합 6 (총 46 통과), 프론트 컴포넌트 테스트
+- 데모 매핑: `docs/demo-scenarios.md` (환자×약물→경고, 실제 엔진 출력 기반)
 
-> 각 단계 완료 시 무엇을 만들었는지 요약하고 다음 단계 진행 전 사용자 확인을 받는다.
-> 불명확한 결정은 합리적 기본값으로 진행하되 가정을 명시한다.
+## 스키마 관리
+
+런타임 초기화는 `app/db/init_db.py`의 `create_all`을 사용한다(데모 신뢰성). `backend/alembic`은
+향후 스키마 진화용 골격이며 현재 런타임 경로에서는 사용하지 않는다.
+
+## 작업 규칙
+
+> 새 약물/상호작용은 `app/cdss/rules/*.json` + `app/seed/data.py` 편집으로 확장한다.
+> 규칙 엔진을 수정하면 반드시 `tests/cdss`에 양성/음성 케이스를 함께 추가한다.

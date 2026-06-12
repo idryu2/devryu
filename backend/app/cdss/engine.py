@@ -81,25 +81,56 @@ class RuleEngine:
         # (약물, 신규처방여부) 목록. 기존-기존 조합은 노이즈이므로 최소 한쪽이 신규여야 함.
         items = [(o.drug, True) for o in orders] + [(d, False) for d in patient.current_meds]
         out: list[Alert] = []
+        for rule in rules:
+            if rule["a"] == rule["b"]:
+                # 가산 위험(같은 플래그를 가진 약물 다수): 경고 피로 방지를 위해
+                # 쌍마다 띄우지 않고 관련 약물을 하나의 경고로 집계한다.
+                out += self._aggregate_rule(rule, items)
+            else:
+                out += self._pairwise_rule(rule, items)
+        return out
+
+    def _aggregate_rule(self, rule: dict, items: list[tuple]) -> list[Alert]:
+        seen: set[str] = set()
+        matched: list[tuple] = []
+        for drug, is_new in items:
+            if drug.matches(rule["a"]) and drug.code not in seen:
+                seen.add(drug.code)
+                matched.append((drug, is_new))
+        if len(matched) < 2 or not any(is_new for _, is_new in matched):
+            return []
+        return [
+            Alert(
+                severity=_sev(rule.get("severity", "WARNING")),
+                category="drug_drug",
+                title=rule.get("title", "상호작용: 가산 위험"),
+                description=rule["description"],
+                recommendation=rule.get("recommendation", "병용 위험을 평가하십시오."),
+                evidence=rule.get("evidence", "약물 상호작용 데이터베이스"),
+                related_drugs=tuple(d.name for d, _ in matched),
+            )
+        ]
+
+    def _pairwise_rule(self, rule: dict, items: list[tuple]) -> list[Alert]:
+        out: list[Alert] = []
         for (drug_a, a_new), (drug_b, b_new) in combinations(items, 2):
             if not (a_new or b_new):
                 continue
-            for rule in rules:
-                hit = (drug_a.matches(rule["a"]) and drug_b.matches(rule["b"])) or (
-                    drug_a.matches(rule["b"]) and drug_b.matches(rule["a"])
-                )
-                if hit:
-                    out.append(
-                        Alert(
-                            severity=_sev(rule.get("severity", "WARNING")),
-                            category="drug_drug",
-                            title=rule.get("title", f"상호작용: {drug_a.name} + {drug_b.name}"),
-                            description=rule["description"],
-                            recommendation=rule.get("recommendation", "병용 위험을 평가하십시오."),
-                            evidence=rule.get("evidence", "약물 상호작용 데이터베이스"),
-                            related_drugs=(drug_a.name, drug_b.name),
-                        )
+            hit = (drug_a.matches(rule["a"]) and drug_b.matches(rule["b"])) or (
+                drug_a.matches(rule["b"]) and drug_b.matches(rule["a"])
+            )
+            if hit:
+                out.append(
+                    Alert(
+                        severity=_sev(rule.get("severity", "WARNING")),
+                        category="drug_drug",
+                        title=rule.get("title", f"상호작용: {drug_a.name} + {drug_b.name}"),
+                        description=rule["description"],
+                        recommendation=rule.get("recommendation", "병용 위험을 평가하십시오."),
+                        evidence=rule.get("evidence", "약물 상호작용 데이터베이스"),
+                        related_drugs=(drug_a.name, drug_b.name),
                     )
+                )
         return out
 
     # ── 약물-질환 금기 ─────────────────────────────────────────────────
