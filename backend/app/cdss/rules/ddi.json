@@ -1,0 +1,83 @@
+[
+  {
+    "a": "warfarin",
+    "b": "NSAID",
+    "severity": "CRITICAL",
+    "title": "출혈 위험: 와파린 + NSAID",
+    "description": "와파린과 NSAID 병용은 위장관 출혈 위험을 크게 증가시키며, NSAID가 항응고 효과도 증강시킬 수 있습니다.",
+    "recommendation": "병용을 피하고 진통이 필요하면 acetaminophen을 우선 고려하십시오.",
+    "evidence": "항응고제 사용 가이드라인 - 출혈 위험 약물 병용"
+  },
+  {
+    "a": "warfarin",
+    "b": "antiplatelet",
+    "severity": "CRITICAL",
+    "title": "출혈 위험: 와파린 + 항혈소판제",
+    "description": "와파린과 항혈소판제(아스피린/클로피도그렐) 병용은 중대 출혈 위험을 증가시킵니다.",
+    "recommendation": "병용 필요성을 재평가하고, 불가피하면 위장관 보호와 INR 면밀 모니터링을 시행하십시오.",
+    "evidence": "항응고제 사용 가이드라인"
+  },
+  {
+    "a": "warfarin",
+    "b": "enzyme_inhibitor",
+    "severity": "WARNING",
+    "title": "INR 상승 위험: 와파린 + 효소억제제",
+    "description": "효소억제제(clarithromycin/fluconazole/amiodarone 등)는 와파린 대사를 억제해 INR을 상승시키고 출혈 위험을 높입니다.",
+    "recommendation": "INR을 면밀히 모니터링하고 필요 시 와파린 용량을 감량하십시오.",
+    "evidence": "약물 상호작용 데이터베이스 (CYP2C9/3A4)"
+  },
+  {
+    "a": "doac",
+    "b": "NSAID",
+    "severity": "WARNING",
+    "title": "출혈 위험: DOAC + NSAID",
+    "description": "DOAC(아픽사반/리바록사반)와 NSAID 병용은 위장관 출혈 위험을 증가시킵니다.",
+    "recommendation": "병용을 피하고 대체 진통제를 고려하십시오.",
+    "evidence": "항응고제 사용 가이드라인"
+  },
+  {
+    "a": "hyperkalemia",
+    "b": "hyperkalemia",
+    "severity": "WARNING",
+    "title": "고칼륨혈증 위험: 칼륨 상승 약물 병용",
+    "description": "칼륨을 상승시키는 약물(ACEi/ARB, 칼륨보존이뇨제, 칼륨보충제, TMP-SMX 등)을 2가지 이상 병용하면 고칼륨혈증 위험이 가중됩니다.",
+    "recommendation": "혈청 칼륨을 모니터링하고 신기능 저하 환자에서 특히 주의하십시오.",
+    "evidence": "약물 상호작용 데이터베이스 - 고칼륨혈증"
+  },
+  {
+    "a": "qt_prolong",
+    "b": "qt_prolong",
+    "severity": "WARNING",
+    "title": "QT 연장 위험: QT 연장 약물 병용",
+    "description": "QT를 연장시키는 약물(매크로라이드/플루오로퀴놀론/온단세트론/아미오다론/할로페리돌 등)을 병용하면 torsades de pointes 위험이 증가합니다.",
+    "recommendation": "심전도(QTc)와 전해질(K, Mg)을 모니터링하고 대체 약제를 고려하십시오.",
+    "evidence": "약물 상호작용 데이터베이스 - QT 연장"
+  },
+  {
+    "a": "simvastatin",
+    "b": "enzyme_inhibitor",
+    "severity": "CRITICAL",
+    "title": "근병증 위험: 심바스타틴 + 효소억제제",
+    "description": "강력한 CYP3A4 억제제(clarithromycin/fluconazole/amiodarone 등)는 심바스타틴 농도를 크게 높여 횡문근융해/근병증 위험을 증가시킵니다.",
+    "recommendation": "병용을 피하거나 상호작용이 적은 스타틴(로수바스타틴/프라바스타틴)으로 전환하십시오.",
+    "evidence": "약물 상호작용 데이터베이스 (CYP3A4)"
+  },
+  {
+    "a": "digoxin",
+    "b": "amiodarone",
+    "severity": "WARNING",
+    "title": "디곡신 농도 상승: 디곡신 + 아미오다론",
+    "description": "아미오다론은 디곡신 농도를 상승시켜 디곡신 중독(오심, 시각이상, 부정맥) 위험을 높입니다.",
+    "recommendation": "디곡신 용량을 감량하고 혈중 농도를 모니터링하십시오.",
+    "evidence": "약물 상호작용 데이터베이스"
+  },
+  {
+    "a": "serotonergic",
+    "b": "serotonergic",
+    "severity": "WARNING",
+    "title": "세로토닌 증후군 위험: 세로토닌계 약물 병용",
+    "description": "세로토닌 작용 약물(SSRI, tramadol 등)을 병용하면 세로토닌 증후군 위험이 증가합니다.",
+    "recommendation": "병용 필요성을 재평가하고 증상(고열, 진전, 자율신경 불안정)을 모니터링하십시오.",
+    "evidence": "약물 상호작용 데이터베이스 - 세로토닌"
+  }
+]

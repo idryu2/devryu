@@ -1,0 +1,11 @@
+{
+  "direct_severity": "CRITICAL",
+  "cross_reactivity": [
+    {
+      "allergy": "penicillin",
+      "cross_class": "cephalosporin",
+      "severity": "WARNING",
+      "note": "페니실린 알레르기 환자에서 세팔로스포린 교차반응 가능성이 있습니다(특히 1세대). 과거 반응의 중증도를 평가하십시오."
+    }
+  ]
+}

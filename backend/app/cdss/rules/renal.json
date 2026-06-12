@@ -1,0 +1,74 @@
+[
+  {
+    "match": "metformin",
+    "threshold_egfr": 30,
+    "mode": "contraindicate",
+    "severity": "CRITICAL",
+    "description": "eGFR 30 미만에서 metformin은 젖산산증 위험으로 금기입니다.",
+    "recommendation": "metformin을 중단하고 대체 혈당강하제를 고려하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "metformin",
+    "threshold_egfr": 45,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "eGFR 30~45 구간에서는 metformin 감량 및 신중한 사용이 권고됩니다.",
+    "recommendation": "용량을 감량(예: 최대 1000mg/일)하고 신기능을 추적하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "NSAID",
+    "threshold_egfr": 30,
+    "mode": "contraindicate",
+    "severity": "WARNING",
+    "description": "eGFR 30 미만에서 NSAID는 신기능 악화 위험으로 회피가 권고됩니다.",
+    "recommendation": "NSAID를 회피하고 대체 진통제를 사용하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "doac",
+    "threshold_egfr": 30,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "eGFR 30 미만에서는 DOAC 용량 조정 또는 대체가 필요합니다.",
+    "recommendation": "제품별 신기능 기준에 따라 감량하거나 대체 항응고 전략을 고려하십시오.",
+    "evidence": "항응고제 사용 가이드라인"
+  },
+  {
+    "match": "gabapentin",
+    "threshold_egfr": 60,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "gabapentin은 신배설 약물로 eGFR 60 미만에서 용량 조정이 필요합니다.",
+    "recommendation": "신기능에 따라 용량/간격을 조정하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "vancomycin",
+    "threshold_egfr": 60,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "vancomycin은 신배설/신독성 약물로 신기능 저하 시 용량 조정과 농도 모니터링이 필요합니다.",
+    "recommendation": "혈중 농도(trough/AUC) 기반으로 용량을 조정하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "aminoglycoside",
+    "threshold_egfr": 60,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "아미노글리코사이드는 신독성/신배설 약물로 신기능 저하 시 용량 조정이 필요합니다.",
+    "recommendation": "용량/간격을 조정하고 혈중 농도와 신기능을 모니터링하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "match": "digoxin",
+    "threshold_egfr": 30,
+    "mode": "adjust",
+    "severity": "WARNING",
+    "description": "digoxin은 신배설 약물로 신기능 저하 시 축적되어 중독 위험이 높아집니다.",
+    "recommendation": "용량을 감량하고 혈중 농도를 모니터링하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  }
+]

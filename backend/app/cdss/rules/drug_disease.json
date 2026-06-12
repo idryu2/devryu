@@ -1,0 +1,56 @@
+[
+  {
+    "condition": "asthma",
+    "match": "beta_blocker_nonselective",
+    "severity": "CRITICAL",
+    "title": "천식 금기: 비선택적 베타차단제",
+    "description": "비선택적 베타차단제(propranolol 등)는 기관지 평활근 β2 수용체를 차단해 천식 환자에서 중증 기관지수축을 유발할 수 있습니다.",
+    "recommendation": "비선택적 베타차단제를 피하고, 필요 시 심장선택적 베타차단제를 신중히 고려하십시오.",
+    "evidence": "약물-질환 금기 기준"
+  },
+  {
+    "condition": "ckd",
+    "match": "NSAID",
+    "severity": "WARNING",
+    "title": "CKD 주의: NSAID",
+    "description": "NSAID는 신혈류를 감소시켜 만성콩팥병 환자에서 신기능을 추가로 악화시킬 수 있습니다.",
+    "recommendation": "NSAID를 피하고 acetaminophen 등 대체 진통제를 고려하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "condition": "ckd",
+    "match": "iodinated_contrast",
+    "severity": "WARNING",
+    "title": "CKD 주의: 요오드 조영제",
+    "description": "요오드 조영제는 만성콩팥병 환자에서 조영제유발신병증(CIN) 위험을 높입니다.",
+    "recommendation": "수액 수화, 최소 용량 사용, 신독성 약물 회피를 고려하고 시행 여부를 재평가하십시오.",
+    "evidence": "CKD 환자 약물 조정 가이드라인"
+  },
+  {
+    "condition": "peptic_ulcer",
+    "match": "NSAID",
+    "severity": "WARNING",
+    "title": "소화성궤양 주의: NSAID",
+    "description": "NSAID는 소화성궤양 병력 환자에서 위장관 출혈/천공 위험을 증가시킵니다.",
+    "recommendation": "NSAID를 피하거나 위장관 보호(PPI 병용)를 시행하십시오.",
+    "evidence": "약물-질환 금기 기준"
+  },
+  {
+    "condition": "heart_failure",
+    "match": "NSAID",
+    "severity": "WARNING",
+    "title": "심부전 주의: NSAID",
+    "description": "NSAID는 수분/나트륨 저류를 유발해 심부전을 악화시킬 수 있습니다.",
+    "recommendation": "NSAID를 피하고 대체 진통제를 고려하십시오.",
+    "evidence": "약물-질환 금기 기준"
+  },
+  {
+    "condition": "liver_disease",
+    "match": "acetaminophen",
+    "severity": "WARNING",
+    "title": "간기능 저하 주의: Acetaminophen",
+    "description": "간기능 저하 환자에서 acetaminophen 고용량은 간독성 위험을 높입니다.",
+    "recommendation": "일일 최대 용량을 제한(예: 2g/일 이하)하고 간기능을 모니터링하십시오.",
+    "evidence": "약물-질환 금기 기준"
+  }
+]

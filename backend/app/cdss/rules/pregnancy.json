@@ -1,0 +1,44 @@
+[
+  {
+    "match": "warfarin",
+    "severity": "CRITICAL",
+    "description": "와파린은 태아 와파린 증후군 등 기형을 유발하는 명백한 최기형성 약물입니다.",
+    "recommendation": "임신부에게 금기이며, 항응고가 필요하면 저분자량 헤파린으로 전환하십시오.",
+    "evidence": "임신부 투여 금기"
+  },
+  {
+    "match": "ACEi",
+    "severity": "CRITICAL",
+    "description": "ACE 억제제는 2·3분기에 태아 신독성, 양수과소증, 두개골 형성이상을 유발할 수 있습니다.",
+    "recommendation": "임신부에게 금기이며, 임신에 안전한 항고혈압제로 전환하십시오.",
+    "evidence": "임신부 투여 금기"
+  },
+  {
+    "match": "ARB",
+    "severity": "CRITICAL",
+    "description": "ARB는 ACE 억제제와 동일하게 태아 신독성 등 위험으로 임신부에 금기입니다.",
+    "recommendation": "임신에 안전한 항고혈압제로 전환하십시오.",
+    "evidence": "임신부 투여 금기"
+  },
+  {
+    "match": "statin",
+    "severity": "CRITICAL",
+    "description": "스타틴은 임신 중 사용이 권고되지 않습니다(태아 콜레스테롤 합성 영향 우려).",
+    "recommendation": "임신 중 스타틴을 중단하십시오.",
+    "evidence": "임신부 투여 금기"
+  },
+  {
+    "match": "fluoroquinolone",
+    "severity": "WARNING",
+    "description": "플루오로퀴놀론은 동물실험에서 연골 독성이 보고되어 임신부에서 가급적 회피합니다.",
+    "recommendation": "임신에 더 안전한 항생제를 우선 고려하십시오.",
+    "evidence": "임신부 투여 주의"
+  },
+  {
+    "match": "NSAID",
+    "severity": "WARNING",
+    "description": "NSAID는 임신 후기(3분기)에 태아 동맥관 조기폐쇄와 양수과소증 위험이 있습니다.",
+    "recommendation": "임신 후기에는 회피하고 acetaminophen을 우선 고려하십시오.",
+    "evidence": "임신부 투여 주의"
+  }
+]

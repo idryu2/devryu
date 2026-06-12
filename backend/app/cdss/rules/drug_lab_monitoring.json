@@ -1,0 +1,51 @@
+[
+  {
+    "match": "warfarin",
+    "lab": "INR",
+    "description": "와파린은 INR 모니터링이 필요합니다(목표 INR 범위 유지).",
+    "recommendation": "INR을 정기적으로 측정하고 목표 범위(보통 2.0~3.0)를 유지하십시오.",
+    "evidence": "항응고제 사용 가이드라인"
+  },
+  {
+    "match": "statin",
+    "lab": "ALT/AST(LFT)",
+    "description": "스타틴 시작 시 간기능 검사(LFT) 기저치 확인이 권고됩니다.",
+    "recommendation": "기저 LFT를 확인하고 증상 발생 시 추적하십시오.",
+    "evidence": "지질 치료 권고"
+  },
+  {
+    "match": "digoxin",
+    "lab": "디곡신 혈중농도",
+    "description": "디곡신은 치료역이 좁아 혈중 농도 모니터링이 권고됩니다.",
+    "recommendation": "정상상태 혈중 농도와 전해질(K, Mg)을 모니터링하십시오.",
+    "evidence": "약물 모니터링 권고"
+  },
+  {
+    "match": "ACEi",
+    "lab": "K+ / Cr",
+    "description": "ACE 억제제 시작/증량 시 혈청 칼륨과 신기능 모니터링이 필요합니다.",
+    "recommendation": "1~2주 내 K+, Cr을 재확인하십시오.",
+    "evidence": "고혈압 1차 약제 가이드라인"
+  },
+  {
+    "match": "ARB",
+    "lab": "K+ / Cr",
+    "description": "ARB 시작/증량 시 혈청 칼륨과 신기능 모니터링이 필요합니다.",
+    "recommendation": "1~2주 내 K+, Cr을 재확인하십시오.",
+    "evidence": "고혈압 1차 약제 가이드라인"
+  },
+  {
+    "match": "spironolactone",
+    "lab": "K+",
+    "description": "스피로노락톤은 고칼륨혈증 위험이 있어 칼륨 모니터링이 필요합니다.",
+    "recommendation": "혈청 칼륨을 정기적으로 모니터링하십시오.",
+    "evidence": "약물 모니터링 권고"
+  },
+  {
+    "match": "vancomycin",
+    "lab": "혈중농도 / Cr",
+    "description": "반코마이신은 신독성 위험으로 혈중농도와 신기능 모니터링이 필요합니다.",
+    "recommendation": "trough/AUC와 신기능을 모니터링하십시오.",
+    "evidence": "약물 모니터링 권고"
+  }
+]
