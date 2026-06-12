@@ -1,0 +1,52 @@
+# 처방 CDSS 시연 시스템 - 전체 스택 (db + backend + frontend)
+# Quickstart: cp .env.example .env && docker compose up --build
+#
+# LLM 키가 없어도 동작합니다. 키가 없으면 backend가 자동으로 mock 응답을 반환합니다.
+
+services:
+  db:
+    # pgvector가 포함된 PostgreSQL 15 이미지 (관계형 데이터 + RAG 벡터를 한 DB에서 관리)
+    image: pgvector/pgvector:pg15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cdss}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cdss}
+      POSTGRES_DB: ${POSTGRES_DB:-cdss}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      # backend가 DB 준비 완료 후 마이그레이션/시드를 실행하도록 보장
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cdss} -d ${POSTGRES_DB:-cdss}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - .env
+    environment:
+      # .env의 호스트가 'localhost'여도 컨테이너 내부에서는 'db'로 접속해야 하므로 명시적으로 덮어씀
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-cdss}:${POSTGRES_PASSWORD:-cdss}@db:5432/${POSTGRES_DB:-cdss}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    # 기동 시: 마이그레이션 → 시드 → API 서버 (entrypoint에서 처리)
+    command: ["./scripts/start.sh"]
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
